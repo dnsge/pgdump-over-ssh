@@ -50,6 +50,8 @@ func init() {
 func main() {
 	file, err := os.Create(getOutputFile(cfg.outputDirectory))
 	ifFatal("Failed to open output file: %v", err)
+	err = file.Chmod(0640)
+	ifFatal("Failed to change output file permissions: %v", err)
 
 	key, err := parseKeyFile(cfg.identityFile)
 	ifFatal("Failed to load identity file: %v", err)
